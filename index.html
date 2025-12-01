@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Rodada Libre - La aplicación móvil para ciclistas urbanos. Encuentra estaciones de bicicletas, talleres de reparación, tiendas y baños públicos en tu ciudad.">
+    <meta name="keywords" content="Rodada Libre, ciclismo urbano, bicicletas, estaciones de bicicletas, app ciclistas">
+    <meta name="theme-color" content="#1a7e5f">
+    <meta property="og:title" content="Rodada Libre - App para Ciclistas Urbanos">
+    <meta property="og:description" content="Encuentra estaciones de bicicletas, talleres de reparación, tiendas y baños públicos con Rodada Libre.">
+    <title>Rodada Libre - La App para Ciclistas Urbanos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a7e5f;
+            --primary-light: #2a9f7f;
+            --secondary: #0f5a42;
+            --accent: #ff6b35;
+            --text-dark: #1a1a1a;
+            --text-light: #666666;
+            --background: #ffffff;
+            --surface: #f8f9fa;
+            --border: #e8eaed;
+            --radius: 12px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            color: var(--text-dark);
+            background-color: var(--background);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--background);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+            fill: var(--primary);
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: var(--primary-light);
+        }
+
+        /* Main Content */
+        main {
+            margin-top: 80px;
+        }
+
+        section {
+            scroll-margin-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 4rem 2rem;
+            min-height: 80vh;
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f5f2 100%);
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero-content .subtitle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .cta-button:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .hero-image {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border-radius: 20px;
+            min-height: 400px;
+            color: white;
+            font-size: 4rem;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 3rem;
+            max-width: 600px;
+        }
+
+        /* What is Rodada Libre Section */
+        .what-is {
+            padding: 4rem 2rem;
+            background: var(--background);
+        }
+
+        .what-is-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .what-is-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--background);
+            padding: 2rem;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(26, 126, 95, 0.1);
+            border-color: var(--primary);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        /* App Preview Section */
+        .app-preview {
+            padding: 4rem 2rem;
+            background: var(--background);
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .preview-card {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--secondary) 100%);
+            border-radius: 20px;
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 5rem;
+            text-align: center;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(26, 126, 95, 0.2);
+        }
+
+        /* Target Audience Section */
+        .audience {
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .audience-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .audience-card {
+            background: var(--background);
+            padding: 1.5rem;
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+        }
+
+        .audience-card:hover {
+            transform: translateX(8px);
+        }
+
+        .audience-card h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .audience-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 4rem 2rem;
+            background: var(--background);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .newsletter-content h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        .newsletter-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+        }
+
+        .newsletter-form button {
+            padding: 0.75rem 2rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .newsletter-form button:hover {
+            background: #e55a2b;
+        }
+
+        .form-message {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Blog Preview Section */
+        .blog {
+            padding: 4rem 2rem;
+            background: var(--surface);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--background);
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(26, 126, 95, 0.1);
+        }
+
+        .blog-image {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+        }
+
+        .blog-content h3 {
+            margin-bottom: 0.75rem;
+            color: var(--text-dark);
+            font-size: 1.2rem;
+        }
+
+        .blog-content p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .blog-tag {
+            display: inline-block;
+            background: var(--surface);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 4rem 2rem;
+            background: var(--background);
+        }
+
+        .faq-container {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 1.5rem;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+
+        .faq-question:hover {
+            color: var(--primary);
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            color: var(--text-light);
+            margin-top: 1rem;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                grid-template-columns: 1fr;
+                min-height: auto;
+                padding: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            nav {
+                display: none;
+            }
+
+            header {
+                padding: 1rem;
+            }
+
+            .features-grid,
+            .preview-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main {
+                margin-top: 60px;
+            }
+
+            header {
+                padding: 0.75rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header>
+        <a href="#" class="logo">
+            🚴 Rodada Libre
+        </a>
+        <nav>
+            <a href="#features">Características</a>
+            <a href="#faq">Preguntas Frecuentes</a>
+            <a href="#newsletter" class="nav-cta">Notificación</a>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero container">
+            <div class="hero-content">
+                <h1>Rodada Libre</h1>
+                <p class="subtitle">La aplicación móvil para ciclistas urbanos</p>
+                <p>Rodada Libre te ayuda a descubrir estaciones de bicicletas, talleres de reparación, tiendas especializadas y baños públicos. Diseñado para hacer tu experiencia de ciclismo urbano más fácil, segura y placentera.</p>
+                <a href="#newsletter" class="cta-button">Próximamente</a>
+            </div>
+            <div class="hero-image">
+                📱
+            </div>
+        </section>
+
+        <!-- What is Rodada Libre Section -->
+        <section class="what-is" id="what-is">
+            <div class="container">
+                <div class="what-is-content">
+                    <h2 class="section-title">¿Qué es Rodada Libre?</h2>
+                    <p>
+                        <strong>Rodada Libre</strong> es una aplicación móvil innovadora diseñada específicamente para ciclistas urbanos que desean optimizar su experiencia de desplazamiento en la ciudad. 
+                        <strong>Rodada Libre</strong> se centra en proporcionar información completa y actualizada sobre la infraestructura de bicicletas disponible en tu entorno.
+                    </p>
+                    <p>
+                        Con <strong>Rodada Libre</strong>, puedes localizar fácilmente estaciones de bicicletas compartidas, talleres de reparación confiables, tiendas de accesorios y rutas recomendadas. Ya sea que seas un ciclista urbano diario, un repartidor, un estudiante que se desplaza en bicicleta o un turista explorando la ciudad, <strong>Rodada Libre</strong> es tu compañero perfecto.
+                    </p>
+                    <p>
+                        Nuestro objetivo es fomentar una comunidad de ciclismo más conectada, informada y segura. <strong>Rodada Libre</strong> empodera a los ciclistas con herramientas para tomar decisiones inteligentes sobre sus desplazamientos y descubrir nuevas rutas y recursos en su ciudad.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Características Principales</h2>
+                <p class="section-subtitle">Descubre lo que Rodada Libre puede hacer por ti</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🗺️</div>
+                        <h3>Mapa de Estaciones</h3>
+                        <p>Encuentra todas las estaciones de bicicletas disponibles en tu ciudad con información en tiempo real sobre disponibilidad.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>Talleres y Tiendas</h3>
+                        <p>Accede a un directorio completo de talleres de reparación y tiendas especializadas en bicicletas cerca de ti.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🚻</div>
+                        <h3>Baños Públicos</h3>
+                        <p>Localiza baños públicos cercanos para mayor comodidad durante tus desplazamientos urbanos.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">❤️</div>
+                        <h3>Guardar Favoritos</h3>
+                        <p>Marca tus lugares favoritos para acceder rápidamente a las estaciones y tiendas que más usas.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🛣️</div>
+                        <h3>Rutas Recomendadas</h3>
+                        <p>Descubre las mejores rutas para ciclistas, optimizadas para seguridad y comodidad en la ciudad.</p>
+                    </div>
+
+                    <div class="feature-card">
+                        <div class="feature-icon">🔄</div>
+                        <h3>Información Actualizada</h3>
+                        <p>Acceso a información en tiempo real sobre cambios, cierres y actualizaciones de la infraestructura ciclista.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- App Preview Section -->
+        <section class="app-preview">
+            <div class="container">
+                <h2 class="section-title">Vista Previa de la App</h2>
+                <p class="section-subtitle">Diseño moderno e intuitivo para tu experiencia</p>
+                
+                <div class="preview-grid">
+                    <div class="preview-card">📍</div>
+                    <div class="preview-card">🗺️</div>
+                    <div class="preview-card">⚙️</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Target Audience Section -->
+        <section class="audience">
+            <div class="container">
+                <h2 class="section-title">¿Para Quién es Rodada Libre?</h2>
+                <p class="section-subtitle">Diseñado para diversos tipos de ciclistas urbanos</p>
+                
+                <div class="audience-grid">
+                    <div class="audience-card">
+                        <h4>🚴 Ciclistas Urbanos</h4>
+                        <p>Optimiza tu desplazamiento diario en bicicleta con información sobre infraestructura disponible.</p>
+                    </div>
+
+                    <div class="audience-card">
+                        <h4>📦 Repartidores</h4>
+                        <p>Encuentra estaciones de bicicletas y talleres de reparación rápidamente durante tu jornada laboral.</p>
+                    </div>
+
+                    <div class="audience-card">
+                        <h4>🎓 Estudiantes</h4>
+                        <p>Desplázate de forma eficiente entre clases con las mejores rutas y estaciones disponibles.</p>
+                    </div>
+
+                    <div class="audience-card">
+                        <h4>🌍 Turistas</h4>
+                        <p>Explora la ciudad como un local, descubriendo rutas seguras y recursos para ciclistas.</p>
+                    </div>
+
+                    <div class="audience-card">
+                        <h4>🎉 Ciclistas Recreativos</h4>
+                        <p>Planifica paseos de fin de semana con recomendaciones de rutas y puntos de interés.</p>
+                    </div>
+
+                    <div class="audience-card">
+                        <h4>🌱 Amigos del Ambiente</h4>
+                        <p>Únete a una comunidad comprometida con la movilidad sostenible y el cuidado del planeta.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About the Project Section -->
+        <section class="about">
+            <div class="container">
+                <div class="about-content">
+                    <h2 class="section-title">Sobre el Proyecto</h2>
+                    <p>
+                        Rodada Libre nace de la necesidad de conectar a los ciclistas urbanos con la información que necesitan para desplazarse de forma segura, eficiente y placentera por la ciudad. En un mundo donde la movilidad sostenible es cada vez más importante, los ciclistas merecen herramientas pensadas específicamente para ellos.
+                    </p>
+                    <p>
+                        Nuestro equipo está comprometido con la misión de promover el ciclismo urbano como una alternativa de transporte viable, saludable y ecológica. Rodada Libre es el resultado de investigación, escucha atenta a la comunidad ciclista y desarrollo cuidadoso de una plataforma que realmente impacte en la experiencia diaria de los ciclistas.
+                    </p>
+                    <p>
+                        Creemos que ciudades más cíclables son ciudades más habitables, inclusivas y saludables. Con Rodada Libre, queremos empoderar a cada ciclista para que tome control de su desplazamiento y sea parte del cambio hacia una movilidad urbana más sostenible.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter" id="newsletter">
+            <div class="newsletter-content">
+                <h2>Sé el Primero en Enterarte</h2>
+                <p>Recibe notificaciones cuando Rodada Libre esté disponible en tu ciudad.</p>
+                
+                <form class="newsletter-form" id="newsletter-form">
+                    <input 
+                        type="email" 
+                        placeholder="Tu correo electrónico" 
+                        required
+                        aria-label="Email para notificaciones"
+                    >
+                    <button type="submit">Notificar</button>
+                </form>
+                <div class="form-message" id="form-message"></div>
+            </div>
+        </section>
+
+        <!-- Blog Preview Section -->
+        <section class="blog">
+            <div class="container">
+                <h2 class="section-title">Blog</h2>
+                <p class="section-subtitle">Consejos, historias e información para ciclistas</p>
+                
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-image">🛡️</div>
+                        <div class="blog-content">
+                            <h3>Consejos de Seguridad para Ciclistas Urbanos</h3>
+                            <p>Aprende las mejores prácticas para mantenerte seguro mientras pedaleas por la ciudad.</p>
+                            <span class="blog-tag">Seguridad</span>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <div class="blog-image">🗺️</div>
+                        <div class="blog-content">
+                            <h3>Las Mejores Rutas de Bicicleta en la Ciudad</h3>
+                            <p>Descubre rutas escénicas y seguras que todo ciclista urbano debe conocer.</p>
+                            <span class="blog-tag">Rutas</span>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <div class="blog-image">🌍</div>
+                        <div class="blog-content">
+                            <h3>Por Qué Más Personas Eligen Bicicleta Para Transportarse</h3>
+                            <p>Exploramos los beneficios de la movilidad en bicicleta para individuos y ciudades.</p>
+                            <span class="blog-tag">Sostenibilidad</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq" id="faq">
+            <div class="container">
+                <h2 class="section-title">Preguntas Frecuentes</h2>
+                <p class="section-subtitle">Encuentra respuestas a las preguntas más comunes</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Cuándo estará disponible Rodada Libre?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Rodada Libre estará disponible próximamente. Estamos finalizando el desarrollo y las pruebas de la aplicación. Suscríbete a nuestro newsletter para recibir notificaciones sobre el lanzamiento en tu ciudad.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Es gratis usar Rodada Libre?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Sí, Rodada Libre será completamente gratuita para todos los usuarios. Creemos que la información sobre infraestructura ciclista debe ser accesible para todos sin barreras de costo.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿En cuáles ciudades estará disponible Rodada Libre?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Planeamos lanzar Rodada Libre primero en las principales ciudades de Latinoamérica. Estamos trabajando en colaboraciones con gobiernos locales y organizaciones de ciclismo. Si quieres que llegue a tu ciudad, contáctanos.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Rodada Libre estará disponible para iOS y Android?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Sí, Rodada Libre será lanzado simultáneamente en las App Stores de iOS y Android para que todos los ciclistas puedan acceder a la aplicación desde el dispositivo de su preferencia.
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <span>¿Cómo se actualizará la información en Rodada Libre?</span>
+                            <span class="faq-toggle">+</span>
+                        </div>
+                        <div class="faq-answer">
+                            Rodada Libre utilizará una combinación de datos en tiempo real de proveedores de servicios, información colaborativa de la comunidad y actualizaciones periódicas. Esto asegura que siempre tengas acceso a la información más actualizada.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Rodada Libre</h4>
+                    <p style="margin-bottom: 1rem; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
+                        La aplicación móvil para ciclistas urbanos. Encuentra estaciones, talleres, tiendas y baños públicos.
+                    </p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="Facebook">f</a>
+                        <a href="#" class="social-icon" aria-label="Twitter">𝕏</a>
+                        <a href="#" class="social-icon" aria-label="Instagram">📷</a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn">in</a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Enlaces</h4>
+                    <ul>
+                        <li><a href="#what-is">¿Qué es Rodada Libre?</a></li>
+                        <li><a href="#features">Características</a></li>
+                        <li><a href="#faq">Preguntas Frecuentes</a></li>
+                        <li><a href="#newsletter">Suscribirse</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Política de Privacidad</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Contacto</a></li>
+                        <li><a href="mailto:hola@rodadalibre.app">hola@rodadalibre.app</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Comunidad</h4>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Foro de Ciclistas</a></li>
+                        <li><a href="#">Reportar un Problema</a></li>
+                        <li><a href="#">Sugerencias de Mejora</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 Rodada Libre. Todos los derechos reservados. Promoviendo la movilidad sostenible en las ciudades.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Newsletter Form Handler
+        const form = document.getElementById('newsletter-form');
+        const formMessage = document.getElementById('form-message');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            
+            // Simple email validation
+            if (email && email.includes('@')) {
+                formMessage.textContent = '✓ ¡Gracias! Te notificaremos pronto.';
+                formMessage.style.color = '#4CAF50';
+                form.reset();
+                
+                // Clear message after 3 seconds
+                setTimeout(() => {
+                    formMessage.textContent = '';
+                }, 3000);
+            } else {
+                formMessage.textContent = '✗ Por favor ingresa un email válido.';
+                formMessage.style.color = '#ff6b35';
+            }
+        });
+
+        // FAQ Accordion Handler
+        const faqItems = document.querySelectorAll('.faq-item');
+        
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            
+            question.addEventListener('click', function() {
+                // Close other items
+                faqItems.forEach(otherItem => {
+                    if (otherItem !== item && otherItem.classList.contains('active')) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+                
+                // Toggle current item
+                item.classList.toggle('active');
+            });
+        });
+
+        // Smooth scroll behavior for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Add fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-card, .blog-card, .audience-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
