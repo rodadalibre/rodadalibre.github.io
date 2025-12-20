@@ -1,4 +1,4 @@
-* {
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -167,6 +167,92 @@
             font-size: 4rem;
             text-align: center;
             padding: 2rem;
+        }
+
+        /* Added Download Section Styles */
+        /* Download Section */
+        .download-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .download-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .download-content .download-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .download-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .download-content > p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.7;
+        }
+
+        .download-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background: white;
+            color: var(--primary);
+            padding: 1.25rem 3rem;
+            border-radius: var(--radius);
+            font-weight: 700;
+            font-size: 1.2rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        .download-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+            background: var(--accent);
+            color: white;
+        }
+
+        .download-icon-btn {
+            font-size: 1.5rem;
+        }
+
+        .download-size {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .download-button:hover .download-size {
+            background: white;
+            color: var(--accent);
+        }
+
+        .download-note {
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         /* Section Styling */
@@ -618,6 +704,16 @@
 
             .newsletter-form {
                 flex-direction: column;
+            }
+
+            /* Added responsive styles for download section */
+            .download-content h2 {
+                font-size: 2rem;
+            }
+
+            .download-button {
+                font-size: 1.1rem;
+                padding: 1rem 2rem;
             }
         }
 
